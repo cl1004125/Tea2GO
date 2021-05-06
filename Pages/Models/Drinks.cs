@@ -8,11 +8,11 @@ namespace Tea2GO.Models
     public class Drink
     {
         public int DrinkID{get; set;}
-        [Display(Drink = "Sweet")]
+        [Display(Drink = "Tea")]
         [Required]
-        public string 
-
         
+
+        public List<DrinkOption> DrinkOptions {get; set;}//navagation property
         
        
     }
