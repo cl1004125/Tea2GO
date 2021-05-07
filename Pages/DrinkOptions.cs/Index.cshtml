@@ -1,0 +1,53 @@
+@page
+@model DrinkOptions.Pages.Drinks.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Drink[0].STea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drink[0].UTea)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Drink) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.STea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UTea)
+            </td>
+            <td>
+                @*   *@
+                @foreach (var course in item.DrinkOptions)
+                {
+                    @option.Options.Description <br />
+                }
+                @if (item.DrinkOptions.Count == 0)
+                {
+                    @:No option
+                }
+            </td>            
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.DrinkID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.DrinkID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.DrinkID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

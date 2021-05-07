@@ -1,0 +1,70 @@
+@page
+@model DrinkOptions.Pages.Drinks.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Drink</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Drink.DrinkID" />
+            <div class="form-group">
+                <label asp-for="Drink.STea" class="control-label"></label>
+                <input asp-for="Drink." class="form-control" />
+                <span asp-validation-for="Drink.STea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Drink.UTea" class="control-label"></label>
+                <input asp-for="Drink.UTea" class="form-control" />
+                <span asp-validation-for="Drink.UTea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <table>
+                        <tr>
+                            @* 
+                            *@
+                            @{
+                                var check = "";
+                                int cnt = 0;
+                                foreach(var course in Model.Option)
+                                {
+                                    if (cnt % 3 == 0)
+                                    {
+                                        @:</tr><tr>
+                                    }
+                                    check = "";
+                                    if (Model.Drink.DrinkOptions.Any(dc => dc.OptionID == Option.OptionID))
+                                    {
+                                        check = "checked";
+                                    }
+                                    <td>
+                                        <input type="checkbox" name="selectedOptions" value="@drink.OptionID" @check /> @option.Description
+                                    </td>
+                                    cnt++;
+                                }
+                                @:</tr>
+                            }
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
